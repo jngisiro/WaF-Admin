@@ -1,0 +1,22 @@
+<div class="ui container">
+  <br>
+  <h1 class="ui header">Waf Admin Login</h1>
+  <br>
+  <form class="ui form">
+    <div class="field">
+      <label>Email Address</label>
+      <input type="email" name="first-name" placeholder="First Name">
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" name="last-name" placeholder="Password">
+    </div>
+    <div class="field">
+      <div class="ui checkbox">
+        <input type="checkbox" tabindex="0" class="hidden">
+        <label>Keep me logged in</label>
+      </div>
+    </div>
+    <button class="ui blue button" (click)="onLogin()">Sign in</button>
+  </form>
+</div>
