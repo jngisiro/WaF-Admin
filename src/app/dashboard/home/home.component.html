@@ -1,13 +1,14 @@
-<br />
+<div class="ui container">
+  <br />
 <h2 class="ui header">Recent Orders</h2>
 
 <table class="ui single line table">
   <thead>
     <tr>
       <th>Name</th>
-      <th>Registration Date</th>
-      <th>E-mail address</th>
-      <th>Premium Plan</th>
+      <th>Date</th>
+      <th>Email</th>
+      <th>Status</th>
     </tr>
   </thead>
   <tbody>
@@ -32,7 +33,7 @@
   </tbody>
 </table>
 
-<button class="ui right labeled icon button" (click)="onAllOrders()">
+<button class="ui primary right labeled icon button" (click)="onAllOrders()">
   <i class="right arrow icon"></i>
   View all orders
 </button>
@@ -42,36 +43,28 @@
 <table class="ui single line table">
   <thead>
     <tr>
+      <th>Product Reference</th>
       <th>Name</th>
-      <th>Registration Date</th>
-      <th>E-mail address</th>
-      <th>Premium Plan</th>
+      <th>Category</th>
+      <th>Price</th>
+      <th>Quantity Available</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>John Lilki</td>
-      <td>September 14, 2013</td>
-      <td>jhlilk22@yahoo.com</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td>Jamie Harington</td>
-      <td>January 11, 2014</td>
-      <td>jamieharingonton@yahoo.com</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td>Jill Lewis</td>
-      <td>May 11, 2014</td>
-      <td>jilsewris22@yahoo.com</td>
-      <td>Yes</td>
+    <tr *ngFor="let product of products">
+      <td>{{ product.id }}</td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.category | titlecase }}</td>
+      <td>{{ product.price }}</td>
+      <td>{{ product.quantityAvailable }} Unit(s)</td>
     </tr>
   </tbody>
 </table>
 
-<button class="ui right labeled icon button" (click)="onAllPoducts()">
+<button class="ui primary right labeled icon button" (click)="onAllPoducts()">
   <i class="right arrow icon"></i>
   View all products
 </button>
 
+
+</div>

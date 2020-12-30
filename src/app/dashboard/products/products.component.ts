@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-products',
@@ -7,9 +8,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-  constructor(private router: Router) {}
+  products;
 
-  ngOnInit(): void {}
+  constructor(private router: Router, private productService: ApiService) {}
+
+  ngOnInit(): void {
+    this.productService.getAllProducts().subscribe(
+      (response) => {
+        this.products = response;
+      },
+      (err) => console.log(err)
+    );
+  }
 
   onAddProduct() {
     this.router.navigate(['add-product']);
