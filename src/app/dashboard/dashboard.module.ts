@@ -8,6 +8,7 @@ import { ProductsComponent } from './products/products.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AddAdminComponent } from './add-admin/add-admin.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,6 @@ import { AddAdminComponent } from './add-admin/add-admin.component';
     ProfileComponent,
     AddAdminComponent,
   ],
-  imports: [CommonModule, DashboardRoutingModule],
+  imports: [CommonModule, DashboardRoutingModule, FormsModule],
 })
 export class DashboardModule {}

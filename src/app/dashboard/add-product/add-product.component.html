@@ -1,43 +1,45 @@
-<br>
-<form class="ui form">
+<div class="ui container">
+  <br>
+<form class="ui form" (ngSubmit)="onSaveProduct(form.value)" #form="ngForm">
   <h4 class="ui dividing header">Fill in Product Information</h4>
   <div class="field">
     <div class="two fields">
       <div class="field">
         <label>Product Name</label>
-        <input type="text" name="shipping[first-name]" placeholder="Product Name">
+        <input name="name" ngModel #name="ngModel" type="text" placeholder="Product Name">
       </div>
       <div class="field">
         <label>Category</label>
-      <select class="ui fluid dropdown">
+      <select name="category" ngModel #category="ngModel" class="ui fluid dropdown">
         <option value="">Select Product Category</option>
-    <option value="AL">Alabama</option>
-    <option value="WI">Wisconsin</option>
-    <option value="WY">Wyoming</option>
+    <option value="health">Health</option>
+    <option value="agriculture">Agriculture</option>
+    <option value="irrigation">Irrigation</option>
       </select>
       </div>
     </div>
   </div>
   <div class="field">
     <label>Description</label>
-    <textarea></textarea>
+    <textarea name="description" ngModel #description="ngModel" ></textarea>
   </div>
   <div class="three fields">
     <div class="field">
       <label>Product's Price</label>
-      <input type="text" name="shipping[first-name]" placeholder="Product's Price">
+      <input name="price" ngModel #price="ngModel" type="text" placeholder="Product's Price">
     </div>
 
     <div class="field">
       <label>Quantity Available</label>
-      <input type="text" name="shipping[first-name]" placeholder="Product's Price">
+      <input type="text" name="quantityAvailable" ngModel #quantityAvailable="ngModel" placeholder="Product's Price">
     </div>
 
     <div class="field">
       <label>Product Image</label>
-      <input type="text" name="shipping[first-name]" placeholder="Product's Image">
+      <input type="text" name="coverImage" ngModel #coverImage="ngModel" placeholder="Product's Image">
     </div>
   </div>
   <br>
-  <div class="ui button" tabindex="0">Save Product</div>
+  <button class="ui secondary button" tabindex="0">Save Product</button>
 </form>
+</div>
