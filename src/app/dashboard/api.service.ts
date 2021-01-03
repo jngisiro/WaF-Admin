@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from './product.model';
 
-import { pluck } from 'rxjs/operators';
+import { map, pluck } from 'rxjs/operators';
+import { OrderResponse } from './orderResponse';
 @Injectable({
   providedIn: 'root',
 })
@@ -25,5 +26,11 @@ export class ApiService {
     return this.http
       .post('https://waf-app.herokuapp.com/api/v1/products', product)
       .pipe(pluck('product'));
+  }
+
+  public getOrders() {
+    return this.http
+      .get<OrderResponse>('https://waf-app.herokuapp.com/api/v1/orders')
+      .pipe(pluck('data', 'orders'));
   }
 }

@@ -1,63 +1,31 @@
-<br>
+<div class="ui container">
+  <br>
 <h2>All Product Orders</h2>
 
-<table class="ui striped table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Date Submitted</th>
-      <th>E-mail</th>
-      <th>Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>John Lilki</td>
-      <td>September 14, 2013</td>
-      <td>jhlilk22@yahoo.com</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td>Jamie Harington</td>
-      <td>January 11, 2014</td>
-      <td>jamieharingonton@yahoo.com</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td>Jill Lewis</td>
-      <td>May 11, 2014</td>
-      <td>jilsewris22@yahoo.com</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td>John Lilki</td>
-      <td>September 14, 2013</td>
-      <td>jhlilk22@yahoo.com</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td>John Lilki</td>
-      <td>September 14, 2013</td>
-      <td>jhlilk22@yahoo.com</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td>Jamie Harington</td>
-      <td>January 11, 2014</td>
-      <td>jamieharingonton@yahoo.com</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td>Jill Lewis</td>
-      <td>May 11, 2014</td>
-      <td>jilsewris22@yahoo.com</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td>John Lilki</td>
-      <td>September 14, 2013</td>
-      <td>jhlilk22@yahoo.com</td>
-      <td>No</td>
-    </tr>
-  </tbody>
-</table>
+<app-loading *ngIf="loading"></app-loading>
+
+<div *ngIf="!loading && orders && orders.length > 0">
+  <table class="ui striped table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Order From</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Payment Method</th>      
+        <th>Products</th>      
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ convertDate(order.orderDate) }}</td>
+        <td>{{ order.user.name }}</td>
+        <td>{{ order.user.email }}</td>
+        <td>{{ order.status }}</td>
+        <td>{{ order.paymentMethod }}</td>
+        <td>({{ order.products.length }})</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>

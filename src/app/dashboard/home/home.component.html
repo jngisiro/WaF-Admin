@@ -1,70 +1,67 @@
 <div class="ui container">
   <br />
 <h2 class="ui header">Recent Orders</h2>
-
-<table class="ui single line table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Date</th>
-      <th>Email</th>
-      <th>Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>John Lilki</td>
-      <td>September 14, 2013</td>
-      <td>jhlilk22@yahoo.com</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <td>Jamie Harington</td>
-      <td>January 11, 2014</td>
-      <td>jamieharingonton@yahoo.com</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td>Jill Lewis</td>
-      <td>May 11, 2014</td>
-      <td>jilsewris22@yahoo.com</td>
-      <td>Yes</td>
-    </tr>
-  </tbody>
-</table>
-
-<button class="ui primary right labeled icon button" (click)="onAllOrders()">
-  <i class="right arrow icon"></i>
-  View all orders
-</button>
+<app-loading *ngIf="loadingOrders"></app-loading>
+<div *ngIf="!loadingOrders && orders && orders.length > 0">
+  <table class="ui single line table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Order From</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Payment Method</th>      
+        <th>Products</th>      
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ convertDate(order.orderDate) }}</td>
+        <td>{{ order.user.name }}</td>
+        <td>{{ order.user.email }}</td>
+        <td>{{ order.status }}</td>
+        <td>{{ order.paymentMethod }}</td>
+        <td>({{ order.products.length }})</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <button class="ui primary right labeled icon button" (click)="onAllOrders()">
+    <i class="right arrow icon"></i>
+    View all orders
+  </button>
+</div>
 
 <h2 class="ui header">Latest Products</h2>
 
-<table class="ui single line table">
-  <thead>
-    <tr>
-      <th>Product Reference</th>
-      <th>Name</th>
-      <th>Category</th>
-      <th>Price</th>
-      <th>Quantity Available</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let product of products">
-      <td>{{ product.id }}</td>
-      <td>{{ product.name }}</td>
-      <td>{{ product.category | titlecase }}</td>
-      <td>{{ product.price }}</td>
-      <td>{{ product.quantityAvailable }} Unit(s)</td>
-    </tr>
-  </tbody>
-</table>
-
-<button class="ui primary right labeled icon button" (click)="onAllPoducts()">
-  <i class="right arrow icon"></i>
-  View all products
-</button>
+<app-loading *ngIf="loadingOrders"></app-loading>
+<div *ngIf="!loadingProducts && products && products.length > 0">
+  <table class="ui single line table">
+    <thead>
+      <tr>
+        <th>Product Reference</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Quantity Available</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.id }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.category | titlecase }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.quantityAvailable }} Unit(s)</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <button class="ui primary right labeled icon button" (click)="onAllPoducts()">
+    <i class="right arrow icon"></i>
+    View all products
+  </button>
+</div>
 
 
 </div>
