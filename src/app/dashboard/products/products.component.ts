@@ -9,15 +9,21 @@ import { ApiService } from '../api.service';
 })
 export class ProductsComponent implements OnInit {
   products;
+  loading = false;
 
   constructor(private router: Router, private productService: ApiService) {}
 
   ngOnInit(): void {
+    this.loading = true;
     this.productService.getAllProducts().subscribe(
       (response) => {
+        this.loading = false;
         this.products = response;
       },
-      (err) => console.log(err)
+      (err) => {
+        console.log(err);
+        this.loading = false;
+      }
     );
   }
 

@@ -1,25 +1,27 @@
 <div class="ui blue inverted menu">
   <a class="item" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-    WaF Admin
+    Safe Water Admin
   </a>
-  <a class="item" routerLink="/orders" routerLinkActive="active">
-    Orders
-  </a>
-  <a class="item" routerLink="/products" routerLinkActive="active">
-    Products
-  </a>
-  <div class="right menu">
-    <!-- <div class="item">
-      <div class="ui icon input">
-        <input type="text" placeholder="Search...">
-        <i class="search link icon"></i>
-      </div>
-    </div> -->
-    <a class="item" routerLink="/profile" routerLinkActive="active">
-      Profile
+  <ng-container *ngIf="user">
+    <a class="item" routerLink="/orders" routerLinkActive="active">
+      Orders
     </a>
-    <a class="ui item">
-      Logout
+    <a class="item" routerLink="/products" routerLinkActive="active">
+      Products
     </a>
-  </div>
+    <div class="right menu">
+      <!-- <div class="item">
+        <div class="ui icon input">
+          <input type="text" placeholder="Search...">
+          <i class="search link icon"></i>
+        </div>
+      </div> -->
+      <a class="item" routerLink="/profile" routerLinkActive="active">
+        Profile
+      </a>
+      <a class="ui item" (click)="onLogOut()">
+        Logout
+      </a>
+    </div>
+  </ng-container>
 </div>

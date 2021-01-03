@@ -10,16 +10,36 @@ import { Product } from '../product.model';
 })
 export class HomeComponent implements OnInit {
   products;
+  orders;
+  loadingProducts = false;
+  loadingOrders = false;
 
   constructor(private router: Router, private productService: ApiService) {}
 
   ngOnInit(): void {
+    this.loadingOrders = true;
+    this.loadingProducts = true;
     this.productService.getAllProducts().subscribe(
       (response: Product[]) => {
+        this.loadingProducts = false;
         this.products = response;
-        console.log(this.products);
       },
-      (err) => console.log(err)
+      (err) => {
+        console.log(err);
+        this.loadingProducts = false;
+      }
+    );
+
+    this.productService.getOrders().subscribe(
+      (orders) => {
+        console.log(orders);
+        this.orders = orders;
+        this.loadingOrders = false;
+      },
+      (error) => {
+        this.loadingOrders = false;
+        console.log(error);
+      }
     );
   }
 
@@ -29,5 +49,9 @@ export class HomeComponent implements OnInit {
 
   onAllOrders() {
     this.router.navigate(['orders']);
+  }
+
+  convertDate(date: Date) {
+    return new Date(date).toLocaleDateString();
   }
 }
