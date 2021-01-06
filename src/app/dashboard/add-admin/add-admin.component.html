@@ -2,36 +2,42 @@
   <br>
   <h2 class="ui header">Add Safe Water administrator</h2>
 
-  <form class="ui form">
-    <div class="field">
-      <div class="two fields">
+  <form class="ui form" #form="ngForm" (ngSubmit)="onAddAdmin(form)">
+    
+      
         <div class="field">
-          <label>First Name</label>
-          <input type="text" name="shipping[first-name]" placeholder="First Name">
+          <label>Full Name</label>
+          <input type="text" required minlength="6" name="name" ngModel #name="ngModel" placeholder="Full Name">
         </div>
-        <div class="field">
-          <label>Last Name</label>
-          <input type="text" name="shipping[last-name]" placeholder="Last Name">
-        </div>
-      </div>
-    </div>
+      
     <div class="field">
       <div class="three fields">
         <div class="field">
           <label>Email</label>
-          <input type="text" name="shipping[address]" placeholder="Street Address">
+          <input type="text" required minlength="6" name="email" ngModel #email="ngModel" placeholder="Email Address">
         </div>
         <div class="field">
           <label>Password</label>
-          <input type="password" name="shipping[address-2]" placeholder="Password">
+          <input type="password" required minlength="6" type="password" name="password" ngModel #password="ngModel" placeholder="Password">
         </div>
         <div class="field">
           <label>Confirm Password</label>
-          <input type="password" name="shipping[address-2]" placeholder="Confirm Password">
+          <input type="password" required minlength="6" type="password" name="confirmPassword" ngModel #confirmPassword="ngModel" placeholder="Confirm Password">
         </div>
       </div>
     </div>
     <br>
-    <div class="ui button" tabindex="0">Save Admin</div>
+    <button *ngIf="!loading" class="ui button" [disabled]="form.invalid" tabindex="0">Save Admin</button>
+    <app-loading *ngIf="loading"></app-loading>
   </form>
+
+  <div class="ui info message" *ngIf="showInfo">
+    <i class="close icon" (click)="onClose()"></i>
+    <div class="header">
+      The admininstrator account has been created
+    </div>
+    <ul class="list">
+      <li>The new user should now be able to login with the registered email and password.</li>
+    </ul>
+  </div>
 </div>

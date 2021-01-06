@@ -1,11 +1,19 @@
 <div class="ui container">
   <br>
-<h2>All Product Orders</h2>
+<h2>All Order Placements</h2>
+<div class="five ui buttons">
+  <button class="ui toggle button" (click)="filterOrders('')">All</button>
+  <button class="ui toggle button" (click)="filterOrders('pending')">Pending</button>
+  <button class="ui toggle button" (click)="filterOrders('confirmed')">Confimed</button>
+  <button class="ui toggle button" (click)="filterOrders('archived')">Archived</button>
+  <button class="ui toggle button" (click)="filterOrders('cancelled')">Cancelled</button>
+</div>
 
 <app-loading *ngIf="loading"></app-loading>
 
-<div *ngIf="!loading && orders && orders.length > 0">
-  <table class="ui striped table">
+<div *ngIf="!loading && orders && orders.length > 0">  
+  <br>
+  <table class="ui single line table">
     <thead>
       <tr>
         <th>Date</th>
@@ -17,7 +25,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let order of orders">
+      <tr *ngFor="let order of orders" (click)="onSelectOrder(order)">
         <td>{{ convertDate(order.orderDate) }}</td>
         <td>{{ order.user.name }}</td>
         <td>{{ order.user.email }}</td>
@@ -27,5 +35,13 @@
       </tr>
     </tbody>
   </table>
+</div>
+
+<div *ngIf="(!orders || orders.length === 0 )&& !loading" class="ui placeholder segment">
+  <div class="ui icon header">
+    <i class="pdf file outline icon"></i>
+    No {{orderType}} Orders Available
+  </div>
+  
 </div>
 </div>

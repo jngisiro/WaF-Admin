@@ -1,0 +1,83 @@
+<div class="ui container">
+  <app-loading *ngIf="loading"></app-loading>
+
+  <div *ngIf="!loading && product !== null">
+    <div class="ui divided items">
+      <div class="item">
+        <div class="ui large image">
+          <img class="image" [src]="product.coverImage" />
+        </div>
+        <div class="content">
+          <a class="header">{{ product.name }}</a>
+          <div class="meta">
+            <span class="cinema">{{ product.category }}</span>
+          </div>
+          
+          <div class="description">
+            <p> {{ product.description }}</p>
+          </div>
+
+          <h4 class="ui title">{{product.price | currency: 'UGX '}}</h4>
+          <br>
+          <div class="extra">
+            <div class="ui label" (click)="canEdit = !canEdit"><i class="edit icon"></i>{{ canEdit ? 'Cancel Edit': 'Edit Product' }}</div>
+            <div class="ui label" (click)="onDeleteProduct()"><i class="trash alternate icon"></i>{{ confirmDelete ? 'Confirm Delete' : 'Delete Product'}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!product && !isDeleting && !loading">
+    <br>
+    <div class="ui placeholder segment">
+      <div class="ui icon header">
+        <i class="pdf file outline icon"></i>
+        The Product is unavailable or has been deleted
+      </div>
+      <div class="ui primary button" (click)="onCreateProduct()">Create Product</div>
+    </div>
+  </div>
+</div>
+
+<div class="ui container">
+<form *ngIf="canEdit" class="ui form" (ngSubmit)="onEditProduct(form.value)" #form="ngForm">
+  <h4 class="ui dividing header">Fill in the field you want to update</h4>
+  <div class="field">
+    <div class="two fields">
+      <div class="field">
+        <label>Product Name</label>
+        <input name="name" [(ngModel)]="productName" #name="ngModel" type="text" placeholder="Product Name">
+      </div>
+      <div class="field">
+        <label>Category</label>
+      <input name="category" [(ngModel)]="productCategory" #category="ngModel" placeholder="Product Category">
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <label>Description</label>
+    <textarea name="description" [(ngModel)]="productDesc" #description="ngModel" ></textarea>
+  </div>
+  <div class="three fields">
+    <div class="field">
+      <label>Product's Price</label>
+      <input name="price" [(ngModel)]="productPrice" #price="ngModel" type="text" placeholder="Product's Price">
+    </div>
+
+    <div class="field">
+      <label>Quantity Available</label>
+      <input type="text" name="quantityAvailable" [(ngModel)]="productQty" #quantityAvailable="ngModel" placeholder="Product's Price">
+    </div>
+
+    <div class="field">
+      <label>Product Image</label>
+      <input type="text" name="coverImage" [(ngModel)]="productImage" #coverImage="ngModel" placeholder="Product's Image">
+    </div>
+  </div>
+  <br>
+  <button *ngIf="!isUpdating" class="ui secondary button" tabindex="0">Update Product</button>
+  <app-loading *ngIf="isUpdating"></app-loading>
+</form>
+<br><br>
+</div>

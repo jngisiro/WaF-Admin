@@ -1,0 +1,19 @@
+.ui.horizontal.list {
+  display: flex;
+  flex-flow: row;
+  .item {
+    display: flex;
+    flex-flow: row;
+    margin-left: 40px;
+    align-items: center;
+    // justify-content: center;
+
+    .icon {
+      font-size: 25px;
+    }
+  }
+}
+
+button.ui.button {
+  margin-right: 30px;
+}

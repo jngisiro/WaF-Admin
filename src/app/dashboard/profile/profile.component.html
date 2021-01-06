@@ -1,11 +1,56 @@
 <div class="ui container">
   <br>
 <h2 class="ui header">Hi, {{ user.name }}</h2>
+<h4 class="ui header">@{{user.email}}</h4>
 
+<button class="ui primary button" (click)="canEdit = !canEdit">Edit Credentials</button>
 <div class="ui animated button" tabindex="0" (click)="onAddAdmin()">
   <div class="visible content">Add New Admin</div>
   <div class="hidden content">
     <i class="right arrow icon"></i>
   </div>
 </div>
+
+
+<form *ngIf="canEdit" class="ui form" #form="ngForm" (ngSubmit)="onUpdateAdmin(form.value)">
+  <br><br>
+  <div class="two fields">
+    <div class="field">
+        <label>Full Name</label>
+        <input type="text" required minlength="6" name="name" [(ngModel)]="userName" #name="ngModel" placeholder="Full Name">
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <input type="email" required minlength="6" name="email" [(ngModel)]="userEmail" #email="ngModel" placeholder="Email Address">
+      </div>
+  </div>
+  <br>
+  <div class="ui toggle checkbox">
+    <input type="checkbox" name="public" (change)="onCanUpdatePassword()">
+    <label>Update My Password</label>
+  </div>
+  
+  <div class="field">
+    <br>
+    <div class="three fields" *ngIf="canUpdatePassword">
+      <div class="field">
+        <label>Current Password</label>
+        <input required minlength="6" type="password" name="currentPassword" ngModel #currentPassword="ngModel" placeholder="Current Password">
+      </div>
+      <div class="field">
+        <label>New Password</label>
+        <input required minlength="6" type="password" name="newPassword" ngModel #newPassword="ngModel" placeholder="New Password">
+      </div>
+      <div class="field">
+        <label>Confirm Password</label>
+        <input required minlength="6" type="password" name="confirmPassword" ngModel #confirmPassword="ngModel" placeholder="Confirm New Password">
+      </div>
+    </div>
+  </div>
+  <br>
+  <button *ngIf="!loading" class="ui button" [disabled]="form.invalid" tabindex="0">Update Admin Credentials</button>
+  <app-loading *ngIf="loading"></app-loading>
+  <br><br>
+</form>
 </div>
+

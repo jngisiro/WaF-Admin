@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
 import { Product } from '../product.model';
 
@@ -8,20 +9,27 @@ import { Product } from '../product.model';
   styleUrls: ['./add-product.component.scss'],
 })
 export class AddProductComponent implements OnInit {
-  constructor(private productService: ApiService) {}
+  loading = false;
+  constructor(private productService: ApiService, private router: Router) {}
 
   ngOnInit(): void {}
 
   onSaveProduct(product: Product) {
-    console.log(product);
+    this.loading = true;
     const newproduct: Product = {
       ...product,
       price: +product.price,
       quantityAvailable: +product.quantityAvailable,
     };
     this.productService.createProduct(newproduct).subscribe(
-      (response) => console.log(response),
-      (err) => console.log(err)
+      (response) => {
+        this.loading = false;
+        this.router.navigate(['products']);
+      },
+      (err) => {
+        console.log(err);
+        this.loading = false;
+      }
     );
   }
 }

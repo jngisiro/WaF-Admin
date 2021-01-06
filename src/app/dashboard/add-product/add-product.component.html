@@ -10,12 +10,7 @@
       </div>
       <div class="field">
         <label>Category</label>
-      <select name="category" ngModel #category="ngModel" class="ui fluid dropdown">
-        <option value="">Select Product Category</option>
-    <option value="health">Health</option>
-    <option value="agriculture">Agriculture</option>
-    <option value="irrigation">Irrigation</option>
-      </select>
+      <input name="category" ngModel #category="ngModel" placeHolder="Product Category">
       </div>
     </div>
   </div>
@@ -40,6 +35,7 @@
     </div>
   </div>
   <br>
-  <button class="ui secondary button" tabindex="0">Save Product</button>
+  <button *ngIf="!loading" class="ui secondary button" tabindex="0">Save Product</button>
+  <app-loading *ngIf="loading"></app-loading>
 </form>
 </div>

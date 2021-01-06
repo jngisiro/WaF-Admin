@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
 
 @Component({
@@ -8,15 +9,18 @@ import { ApiService } from '../api.service';
 })
 export class OrdersComponent implements OnInit {
   orders;
+  orderCopy;
   loading = false;
+  orderType = '';
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private router: Router) {}
 
   ngOnInit(): void {
     this.loading = true;
     this.api.getOrders().subscribe(
       (orders) => {
         this.orders = orders;
+        this.orderCopy = orders;
         this.loading = false;
       },
       (error) => {
@@ -28,5 +32,19 @@ export class OrdersComponent implements OnInit {
 
   convertDate(date: Date) {
     return new Date(date).toLocaleDateString();
+  }
+
+  onSelectOrder(order) {
+    this.router.navigate(['order', order.id]);
+  }
+
+  filterOrders(status: string) {
+    if (status !== '') {
+      this.orders = this.orderCopy.filter((order) => order.status === status);
+      this.orderType = status;
+    } else {
+      status = this.orders = this.orderCopy;
+      this.orderType = '';
+    }
   }
 }

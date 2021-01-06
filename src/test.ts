@@ -4,11 +4,15 @@ import 'zone.js/dist/zone-testing';
 import { getTestBed } from '@angular/core/testing';
 import {
   BrowserDynamicTestingModule,
-  platformBrowserDynamicTesting
+  platformBrowserDynamicTesting,
 } from '@angular/platform-browser-dynamic/testing';
 
 declare const require: {
-  context(path: string, deep?: boolean, filter?: RegExp): {
+  context(
+    path: string,
+    deep?: boolean,
+    filter?: RegExp
+  ): {
     keys(): string[];
     <T>(id: string): T;
   };
@@ -23,3 +27,15 @@ getTestBed().initTestEnvironment(
 const context = require.context('./', true, /\.spec\.ts$/);
 // And load the modules.
 context.keys().map(context);
+
+//Solar Sack
+
+//Health
+
+//SolarSack is a refillable water container that improves upon the Solar Water Disinfection (SODIS) method
+
+//700000
+
+//6
+
+//https://safewater-bucket.s3.eu-west-2.amazonaws.com/saka.jpg
