@@ -1,9 +1,9 @@
 <div class="ui container">
   <br />
-<h2 class="ui header">Recent Orders</h2>
+<h2 class="ui header">Pending Orders</h2>
 <app-loading *ngIf="loadingOrders"></app-loading>
-<div *ngIf="!loadingOrders && orders && orders.length > 0">
-  <table class="ui single line table">
+<div>
+  <table *ngIf="!loadingOrders && orders && orders.length > 0" class="ui single line table">
     <thead>
       <tr>
         <th>Date</th>
@@ -15,7 +15,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let order of orders">
+      <tr *ngFor="let order of orders" (click)="onSelectOrder(order)">
         <td>{{ convertDate(order.orderDate) }}</td>
         <td>{{ order.user.name }}</td>
         <td>{{ order.user.email }}</td>
@@ -25,8 +25,16 @@
       </tr>
     </tbody>
   </table>
-  
-  <button class="ui primary right labeled icon button" (click)="onAllOrders()">
+
+  <div *ngIf="(!orders || orders.length === 0) && !loadingOrders" class="ui placeholder segment">
+    <div class="ui icon header">
+      <i class="pdf file outline icon"></i>
+      No Pending Orders Available
+    </div>
+    
+  </div>
+
+  <button *ngIf="!loadingOrders" class="ui primary right labeled icon button" (click)="onAllOrders()">
     <i class="right arrow icon"></i>
     View all orders
   </button>
@@ -47,7 +55,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let product of products">
+      <tr *ngFor="let product of products" (click)="onSelectProduct(product)">
         <td>{{ product.id }}</td>
         <td>{{ product.name }}</td>
         <td>{{ product.category | titlecase }}</td>
@@ -63,5 +71,15 @@
   </button>
 </div>
 
+<div *ngIf="(!products || products.length === 0) && !loadingProducts" class="ui placeholder segment">
+  <div class="ui icon header">
+    <i class="pdf file outline icon"></i>
+    No Products Available
+  </div>
+  <button class="ui primary button" (click)="createNewProduct()">
 
+    Create New Product
+  </button>
+</div>
+<br><br><br>
 </div>

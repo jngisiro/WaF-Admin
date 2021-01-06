@@ -17,8 +17,23 @@ export class ApiService {
   }
 
   public getProduct(id: string) {
-    return this.http.get<Product>(
-      'https://waf-app.herokuapp.com/api/v1/products'
+    return this.http
+      .get<Product>(`https://waf-app.herokuapp.com/api/v1/products/${id}`)
+      .pipe(pluck('data', 'product'));
+  }
+
+  public updateProduct(id: string, product: Product) {
+    return this.http
+      .patch<Product>(
+        `https://waf-app.herokuapp.com/api/v1/products/${id}`,
+        product
+      )
+      .pipe(pluck('data', 'document'));
+  }
+
+  public deleteProduct(id: string) {
+    return this.http.delete<Product>(
+      `https://waf-app.herokuapp.com/api/v1/products/${id}`
     );
   }
 
@@ -32,5 +47,28 @@ export class ApiService {
     return this.http
       .get<OrderResponse>('https://waf-app.herokuapp.com/api/v1/orders')
       .pipe(pluck('data', 'orders'));
+  }
+
+  public getOrder(id: string) {
+    return this.http
+      .get<OrderResponse>(`https://waf-app.herokuapp.com/api/v1/orders/${id}`)
+      .pipe(pluck('data', 'order'));
+  }
+
+  public processOrder(id: string, changes) {
+    return this.http
+      .patch<OrderResponse>(
+        `https://waf-app.herokuapp.com/api/v1/orders/${id}`,
+        {
+          ...changes,
+        }
+      )
+      .pipe(pluck('data', 'order'));
+  }
+
+  public deleteOrder(id: string) {
+    return this.http.delete<OrderResponse>(
+      `https://waf-app.herokuapp.com/api/v1/orders/${id}`
+    );
   }
 }

@@ -1,7 +1,7 @@
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { User } from './user.model';
-import { tap } from 'rxjs/operators';
+import { pluck, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -54,12 +54,7 @@ export class AuthService {
     localStorage.removeItem('userData');
   }
 
-  private handleAuth(
-    email: string,
-    name: string,
-    token: string,
-    expiresIn: number
-  ) {
+  handleAuth(email: string, name: string, token: string, expiresIn: number) {
     const expirationDate = new Date(
       new Date().getTime() + new Date(expiresIn).getTime()
     );
@@ -67,5 +62,25 @@ export class AuthService {
     const user = new User(email, name, token, expirationDate);
     this.user.next(user);
     localStorage.setItem('userData', JSON.stringify(user));
+  }
+
+  updateMe(patches) {
+    return this.http
+      .patch('https://waf-app.herokuapp.com/api/v1/users/updateMe', patches)
+      .pipe(pluck('data', 'user'));
+  }
+
+  updatePassword(credentials) {
+    return this.http.patch(
+      'https://waf-app.herokuapp.com/api/v1/users/updatePassword',
+      credentials
+    );
+  }
+
+  createAdmin(credentials) {
+    return this.http.post(
+      'https://waf-app.herokuapp.com/api/v1/users',
+      credentials
+    );
   }
 }

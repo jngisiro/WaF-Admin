@@ -10,6 +10,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { AddAdminComponent } from './add-admin/add-admin.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { OrderComponent } from './order/order.component';
+import { ProductComponent } from './product/product.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { SharedModule } from '../shared/shared.module';
     AddProductComponent,
     ProfileComponent,
     AddAdminComponent,
+    OrderComponent,
+    ProductComponent,
   ],
   imports: [CommonModule, DashboardRoutingModule, FormsModule, SharedModule],
 })

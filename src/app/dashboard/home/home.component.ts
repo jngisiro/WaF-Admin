@@ -32,8 +32,7 @@ export class HomeComponent implements OnInit {
 
     this.productService.getOrders().subscribe(
       (orders) => {
-        console.log(orders);
-        this.orders = orders;
+        this.orders = orders.filter((order) => order.status === 'pending');
         this.loadingOrders = false;
       },
       (error) => {
@@ -53,5 +52,17 @@ export class HomeComponent implements OnInit {
 
   convertDate(date: Date) {
     return new Date(date).toLocaleDateString();
+  }
+
+  onSelectOrder(order) {
+    this.router.navigate(['order', order.id]);
+  }
+
+  onSelectProduct(product) {
+    this.router.navigate(['product', product.id]);
+  }
+
+  createNewProduct() {
+    this.router.navigate(['add-product']);
   }
 }

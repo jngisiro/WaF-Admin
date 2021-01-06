@@ -30,4 +30,8 @@ export class ProductsComponent implements OnInit {
   onAddProduct() {
     this.router.navigate(['add-product']);
   }
+
+  onSelectProduct(product) {
+    this.router.navigate(['product', product.id]);
+  }
 }
