@@ -14,7 +14,7 @@ export class AuthService {
 
   loginUser(email: string, password: string) {
     return this.http
-      .post('https://waf-app.herokuapp.com/api/v1/users/login', {
+      .post('https://waf-app.herokuapp.com/api/v1/users/login?role=admin', {
         email,
         password,
       })

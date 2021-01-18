@@ -56,7 +56,7 @@
 
     <div class="ui divider"></div>
       <br>
-      <div *ngIf="order.status === 'completed' && !onprocessOrder">
+      <div *ngIf="order.status === 'confirmed' && !onprocessOrder">
         <div (click)="onConfirmOrder()" class="ui animated fade button" tabindex="0">
           <div class="visible content">Confirm Order</div>
           <div class="hidden content">
