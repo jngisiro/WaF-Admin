@@ -1,35 +1,53 @@
 <div class="ui container">
-  <br>
+  <br />
   <h1 class="ui header">Admin Login</h1>
 
   <div class="ui attached message">
-    <div class="header">
-      Welcome to the Adminstrator's Panel
-    </div>
+    <div class="header">Welcome to the Adminstrator's Panel</div>
     <p>Fill out the form below to sign into your account</p>
   </div>
 
-  <form class="ui form attached fluid segment" #form="ngForm" (ngSubmit)="onLogin(form.value)">
+  <form
+    class="ui form attached fluid segment"
+    #form="ngForm"
+    (ngSubmit)="onLogin(form.value)"
+  >
     <div class="field">
       <label>Email Address</label>
-      <input ngModel #email="ngModel" type="email" name="email" placeholder="Email Address">
+      <input
+        ngModel
+        #email="ngModel"
+        required
+        type="email"
+        name="email"
+        placeholder="Email Address"
+      />
     </div>
     <div class="field">
       <label>Password</label>
-      <input ngModel #password="ngModel" type="password" name="password" placeholder="Password">
+      <input
+        ngModel
+        #password="ngModel"
+        required
+        type="password"
+        name="password"
+        placeholder="Password"
+      />
     </div>
     <div class="field">
       <div class="ui checkbox">
-        <input type="checkbox" tabindex="0" class="hidden">
+        <input type="checkbox" tabindex="0" class="hidden" />
         <label>Keep me logged in</label>
       </div>
     </div>
-    <button *ngIf="!loading" type="submit" class="ui blue button">Sign in</button>
+    <button *ngIf="!loading && form.valid" type="submit" class="ui blue button">
+      Sign in
+    </button>
     <app-loading *ngIf="loading"></app-loading>
   </form>
   <div *ngIf="error" class="ui bottom attached warning message">
     <i class="icon warning"></i>
-    {{error }}.
+    {{ error }}.
     <!-- Forgot<a href="#"> Password</a>? -->
   </div>
 </div>
