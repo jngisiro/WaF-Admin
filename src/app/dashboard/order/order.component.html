@@ -4,7 +4,7 @@
   <div *ngIf="!loading && order">
     <br>
     <h2 class="ui title">ORDER REFERENCE - {{ order.id }}</h2>
-    
+
     <div class="ui divider"></div>
 
     <div class="ui small horizontal list">
@@ -47,7 +47,7 @@
           <div class="meta">
             <span class="cinema">{{ product.category }}</span>
           </div>
-          
+
           <div class="extra"><div class="ui label">
             <i class="money bill alternate outline icon"></i> {{ product.price | currency: 'UGX: ' }}
           </div>
@@ -58,14 +58,14 @@
 
     <div class="ui divider"></div>
       <br>
-      <div *ngIf="order.status === 'confirmed' && !onprocessOrder">
+      <div *ngIf="order.status === 'pending' && !onprocessOrder">
         <div (click)="onConfirmOrder()" class="ui animated fade button" tabindex="0">
           <div class="visible content">Confirm Order</div>
           <div class="hidden content">
             {{ total | currency: 'UGX ' }}
           </div>
         </div>
-  
+
         <button class="ui negative button" style="margin-left: 30px;" (click)="onCancelOrder()">Cancel Order</button>
       </div>
 
@@ -79,7 +79,7 @@
           The order with reference <span>{{ order.id }}</span> has been cancelled.
         </div>
         <p>You can go ahead and delete it or archive it for book keeping</p>
-        
+
         <button class="ui teal button">Archive</button>
         <button class="ui negative button" (click)="onDeleteOrder()">Delete</button>
       </div>
@@ -91,7 +91,7 @@
           The order with reference <span>{{ order.id }}</span> has been confirmed.
         </div>
         <p>You can go ahead and delete it or archive it for book keeping</p>
-        
+
         <button class="ui teal button" (click)="onArchiveOrder()">Archive</button>
         <button class="ui negative button" (click)="onDeleteOrder()">Delete</button>
       </div>
@@ -103,7 +103,7 @@
           The order with reference <span>{{ order.id }}</span> has been archived.
         </div>
         <p>You can go ahead and delete it or continue to process other orders.</p>
-        
+
         <button class="ui teal button" (click)="onContinue()">Continue</button>
         <button class="ui negative button" (click)="onDeleteOrder()">Delete</button>
       </div>
