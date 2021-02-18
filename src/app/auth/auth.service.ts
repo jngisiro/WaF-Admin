@@ -20,7 +20,6 @@ export class AuthService {
       })
       .pipe(
         tap((response: any) => {
-          console.log(response);
           this.handleAuth(
             response.data.user.email,
             response.data.user.name,
@@ -55,9 +54,7 @@ export class AuthService {
   }
 
   handleAuth(email: string, name: string, token: string, expiresIn: number) {
-    const expirationDate = new Date(
-      new Date().getTime() + new Date(expiresIn).getTime()
-    );
+    const expirationDate = new Date(new Date(expiresIn).getTime());
 
     const user = new User(email, name, token, expirationDate);
     this.user.next(user);
