@@ -10,15 +10,15 @@
         <th>Order From</th>
         <th>Email</th>
         <th>Status</th>
-        <th>Payment Method</th>      
-        <th>Products</th>      
+        <th>Payment Method</th>
+        <th>Products</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let order of orders" (click)="onSelectOrder(order)">
         <td>{{ convertDate(order.orderDate) }}</td>
-        <td>{{ order.user.name }}</td>
-        <td>{{ order.user.email }}</td>
+        <td>{{ order.name }}</td>
+        <td>{{ order.email }}</td>
         <td>{{ order.status }}</td>
         <td>{{ order.paymentMethod }}</td>
         <td>({{ order.products.length }})</td>
@@ -31,7 +31,7 @@
       <i class="pdf file outline icon"></i>
       No Pending Orders Available
     </div>
-    
+
   </div>
 
   <button *ngIf="!loadingOrders" class="ui primary right labeled icon button" (click)="onAllOrders()">
@@ -64,7 +64,7 @@
       </tr>
     </tbody>
   </table>
-  
+
   <button class="ui primary right labeled icon button" (click)="onAllPoducts()">
     <i class="right arrow icon"></i>
     View all products
